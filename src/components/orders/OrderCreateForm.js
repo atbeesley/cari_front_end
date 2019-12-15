@@ -15,15 +15,6 @@ class OrderCreateForm extends Component {
       topping: []
     }
 
-// commented this binding out for now:
-
-// this.handleCustomerName = this.handleCustomerName.bind(this);
-// this.handleUserName = this.handleUserName.bind(this);
-// this.handleEmailAddress = this.handleEmailAddress.bind(this);
-// this.handleRiceLevel = this.handleRiceLevel.bind(this);
-// this.handleRiceType = this.handleRiceType.bind(this);
-// this.handleSpiceLevel = this.handleSpiceLevel.bind(this);
-
 this.handleCustomerName = this.handleCustomerName.bind(this);
 this.handleUserName = this.handleUserName.bind(this);
 this.handleEmailAddress = this.handleEmailAddress.bind(this);
