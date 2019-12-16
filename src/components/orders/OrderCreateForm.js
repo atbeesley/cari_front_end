@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Request from '../../helpers/Request'
 
 
 class OrderCreateForm extends Component {
@@ -25,12 +26,12 @@ this.handleIngredient = this.handleIngredient.bind(this);
 this.handleTopping = this.handleTopping.bind(this);
   }
 
-  // componentDidMount(){
-  //   const request = new Request();
-  //   request.get('/orders').then((data) => {
-  //     this.setState({orders: data._embedded.orders})
-  //   })
-  // }
+  componentDidMount(){
+    const request = new Request();
+    request.get('/orders').then((data) => {
+      this.setState({orders: data._embedded.orders})
+    })
+  }
 
   handleCustomerName(event){
     this.setState({customerName: event.target.value})
