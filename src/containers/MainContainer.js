@@ -1,18 +1,39 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import NavBar from '../NavBar.js'
+import Request from '../helpers/Request';
 import OrderCreateForm from '../components/orders/OrderCreateForm'
-// remember to import other stuffs later
+import RestaurantContainer from './RestaurantContainer'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
-const MainContainer = () => {
+class MainContainer extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      restaurant: []
+    }
+  }
 
-  return (
+  componentDidMount(){
+  const request = new Request();
 
-    <div>
-      <NavBar />
-      <OrderCreateForm />
-    </div>
-  )
-
+  request.get('/restaurants')
+  .then((data) => {
+    this.setState({restaurants: data._embedded.restaurants})
+  })
 }
 
-export default MainContainer
+render(){
+  return (
+    <Router>
+    <Fragment>
+      <NavBar />
+      <Switch>
+      <Route path="/restaurants" component={RestaurantContainer}/>
+      </Switch>
+      </Fragment>
+      </Router>
+  )
+}
+}
+
+export default MainContainer;
