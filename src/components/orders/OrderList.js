@@ -24,4 +24,5 @@ const OrderList = (props) => {
 	  </ul>
 	)
 }
- export default OrderList;
+
+export default OrderList;

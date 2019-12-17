@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom'
 
 const Order = (props) => {
 
-  // if (!props.order){
-  //   return "Loading..."
-  // }
+  if (!props.order){
+    return "Loading..."
+  }
 
   const url = "/orders/" + props.order.id;
 

@@ -12,8 +12,8 @@ class RestaurantContainer extends Component{
     this.state = {
       restaurant: []
     }
-      this.findRestaurantById = this.findRestaurantById.bind(this);
-      this.handleDelete = this.handleDelete.bind(this);
+      // this.findRestaurantById = this.findRestaurantById.bind(this);
+      // this.handleDelete = this.handleDelete.bind(this);
   }
   componentDidMount(){
     const request = new Request();
@@ -29,20 +29,20 @@ class RestaurantContainer extends Component{
   // }
   // handleDelete(id){
   //   const request = new Request();
-  //   const url = '/api/restaurants/' + id;
+  //   const url = '/restaurants/' + id;
   //   request.delete(url).then(() => {
   //     window.location = '/restaurants';
   //   });
   // }
   // handlePost(order){
   //   const request = new Request();
-  //   request.post('/api/restaurants', restaurant).then(() => {
+  //   request.post('/restaurants', restaurant).then(() => {
   //     window.location = '/restaurants'
   //   })
   // }
   // handleUpdate(order, id){
   //   const request = new Request();
-  //   request.patch('/api/restaurants/' + id, restaurant).then(() => {
+  //   request.patch('/restaurants/' + id, restaurant).then(() => {
   //     window.location = '/restaurants/' + id
   //   })
   // }
