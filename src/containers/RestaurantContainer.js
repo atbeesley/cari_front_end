@@ -48,7 +48,7 @@ class RestaurantContainer extends Component{
   // }
   render(){
     return(
-      <h1>{this.state.restaurants}</h1>
+      <p>Hi</p>
     )
   }
 }

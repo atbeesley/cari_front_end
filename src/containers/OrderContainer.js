@@ -11,6 +11,7 @@ constructor(props){
   this.state = {
     orders: []
   }
+  this.handleFormSubmit = this.handleFormSubmit.bind(this);
 }
 
 componentDidMount(){
@@ -22,17 +23,22 @@ componentDidMount(){
   })
 }
 
+handleFormSubmit(submittedForm){
+  console.log(submittedForm);
+  submittedForm.id = Date.now();
+  const updatedOrders = [...this.state.orders, submittedForm];
+  console.log(updatedOrders);
+  this.setState({
+    orders: updatedOrders
+  })
+}
+
   render(){
     return(
-      <Router>
       <Fragment>
-      <Switch>
-      <Route render={(props) => {
-        return <OrderList orders={this.state.orders}/>
-      }}/>
-      </Switch>
+        <OrderCreateForm onFormSubmit= {this.handleFormSubmit} />
+        <OrderList orders={this.state.orders}/>
       </Fragment>
-      </Router>
     )
   }
 

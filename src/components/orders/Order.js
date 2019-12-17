@@ -14,7 +14,9 @@ const Order = (props) => {
     <Link to = {url} className="name">
     {props.order.customerName}
     </Link>
-    <p>: {props.order.id}</p>
+    <p>Name: {props.order.customer.name}</p>
+    <p>ID: {props.order.id}</p>
+    <p>Price: {props.order.price}</p>
 
     </Fragment>
   )

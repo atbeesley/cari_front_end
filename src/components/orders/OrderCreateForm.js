@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import Request from '../../helpers/Request'
 
 
@@ -6,24 +6,17 @@ class OrderCreateForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      customerName: "",
-      userName: "",
-      emailAddress: "",
-      riceLevel: "",
-      riceType: "",
-      spiceLevel: "",
-      ingredient: [],
-      topping: []
+      collectionTime: "",
+      customer: "",
+      dishes: [],
+      collected: false
     }
 
-this.handleCustomerName = this.handleCustomerName.bind(this);
-this.handleUserName = this.handleUserName.bind(this);
-this.handleEmailAddress = this.handleEmailAddress.bind(this);
-this.handleRiceLevel = this.handleRiceLevel.bind(this);
-this.handleRiceType = this.handleRiceType.bind(this);
-this.handleSpiceLevel = this.handleSpiceLevel.bind(this);
-this.handleIngredient = this.handleIngredient.bind(this);
-this.handleTopping = this.handleTopping.bind(this);
+this.handleCollectionTime = this.handleCollectionTime.bind(this);
+this.handleCustomer = this.handleCustomer.bind(this);
+this.handleDishes= this.handleDishes.bind(this);
+this.handleCollected = this.handleCollected.bind(this);
+this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount(){
@@ -32,42 +25,50 @@ this.handleTopping = this.handleTopping.bind(this);
       this.setState({orders: data._embedded.orders})
     })
   }
-
-  handleCustomerName(event){
-    this.setState({customerName: event.target.value})
+  
+  handleSubmit(event){
+    event.preventDefault();
+    const collectionTime = this.state.collectionTime;
+    const customer = this.state.customer;
+    const dishes = this.state.dishes;
+    const collected = this.state.collected;
+    // const newOrder = {
+    //   collectionTime: this.state.collectionTime,
+    //   customer: this.state.customer,
+    //   restaurant: this.state.restaurant,
+    //   dishes: this.state.dishes,
+    //   collected: this.state.collected
+    // }
+    this.props.onFormSubmit({
+        collectionTime: collectionTime,
+        customer: customer,
+        dishes: dishes,
+        collected: collected
+    });
+    this.setState({
+      collectionTime: "",
+      customer: "",
+      dishes: [],
+      collected: false
+    });
   }
 
-  handleUserName(event){
-    this.setState({userName: event.target.value})
+  handleCollectionTime(event){
+    this.setState({collectionTime: event.target.value})
   }
 
-  handleEmailAddress(event){
-    this.setState({emailAddress: event.target.value})
+  handleCustomer(event){
+    this.setState({customer: event.target.value})
   }
 
-  handleRiceLevel(event){
-    this.setState({riceLevel: event.target.value})
+  handleDishes(event){
+    this.setState({dishes: event.target.value})
   }
 
-  handleRiceType(event){
-    this.setState({riceType: event.target.value})
+  handleCollected(event){
+    this.setState({collected: event.target.value})
   }
 
-  handleSpiceLevel(event){
-    this.setState({spiceLevel: event.target.value})
-  }
-
-  handleSpiceLevel(event){
-    this.setState({spiceLevel: event.target.value})
-  }
-
-  handleIngredient(event){
-    this.setState({ingredient: event.target.value})
-  }
-
-  handleTopping(event){
-    this.setState({topping: event.target.value})
-  }
 
   findOrderById(id){
     return this.state.orders.find((order) => {
@@ -97,46 +98,25 @@ this.handleTopping = this.handleTopping.bind(this);
     })
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-    const newOrder = {
-      customerName: this.state.customerName,
-      userName: this.state.userName,
-      emailAddress: this.state.emailAddress,
-      riceLevel: this.state.riceLevel,
-      riceType: this.state.riceType,
-      spiceLevel: this.state.spiceLevel,
-      ingredient: this.state.ingredient,
-      topping: this.state.topping
-    }
-    this.props.onFormSubmit(newOrder);
-  }
-
   render(){
     return(
-      <div>
-      <form>
-      <input type="text" placeholder="Customer name" name="customerName"
-      onChange={this.handleCustomerName} value={this.state.customerName} />
+      <form onSubmit={this.handleSubmit}>
+      <input type="text" placeholder="Collection time" name="collectionTime"
+      onChange={this.handleCollectionTime} value={this.state.collectionTime} />
 
-      <input type="text" placeholder="Username" name="userName"
-      onChange={this.handleUserName} value={this.state.userName} />
+      <input type="option" placeholder="Customer" name="customer"
+      onChange={this.handleCustomer} value={this.state.customer} />
 
-      <input type="text" placeholder="Email" name="emailAddress"
-      onChange={this.handleEmailAddress} value={this.state.emailAddress} />
+      <input type="option" placeholder="Dishes" name="dishes"
+      onChange={this.handleDishes} value={this.state.dishes} />
 
-      <input type="text" placeholder="Spice level" name="spiceLevel"
-      onChange={this.handleSpiceLevel} value={this.state.spiceLevel} />
+      <input type="option" placeholder="Collected yet?" name="collected"
+      onChange={this.handleCollected} value={this.state.collected} />
 
-      <input type="text" placeholder="Rice level" name="riceLevel"
-      onChange={this.handleRiceLevel} value={this.state.riceLevel} />
+      <button type="submit" value="Post"
 
-      <input type="text" placeholder="Rice type" name="riceType"
-      onChange={this.handleRiceType} value={this.state.riceType} />
-
-      <button type="submit">Save order</button>
+      >Save order</button>
       </form>
-      </div>
     )
   }
 
