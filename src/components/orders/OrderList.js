@@ -3,7 +3,6 @@ import Order from './Order.js';
 
 
 const OrderList = (props) => {
-	console.log(props);
 	if (props.orders.length === 0){
 	  return (<p>Loading...</p>)
 	}
@@ -20,7 +19,7 @@ const OrderList = (props) => {
 
 	return (
 	  <ul className="component-list">
-    <h1>hi</h1>
+    {orders}
 	  </ul>
 	)
 }

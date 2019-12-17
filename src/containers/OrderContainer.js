@@ -27,7 +27,9 @@ componentDidMount(){
       <Router>
       <Fragment>
       <Switch>
-      <Route render{(props)}
+      <Route render={(props) => {
+        return <OrderList orders={this.state.orders}/>
+      }}/>
       </Switch>
       </Fragment>
       </Router>
