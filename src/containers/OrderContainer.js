@@ -4,41 +4,83 @@ import OrderList from '../components/orders/OrderList'
 import Request from '../helpers/Request.js'
 import OrderDetail from '../components/orders/OrderDetail'
 import OrderCreateForm from '../components/orders/OrderCreateForm'
-
+import OrderEditForm from '../components/orders/OrderEditForm'
 class OrderContainer extends Component {
-constructor(props){
-  super(props);
-  this.state = {
-    orders: []
+  constructor(props){
+    super(props);
+    this.state = {
+      orders: []
+    }
+    this.findOrderById = this.findOrderById.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
-  this.handleFormSubmit = this.handleFormSubmit.bind(this);
-}
 
-componentDidMount(){
-  const request = new Request();
+  componentDidMount(){
+    const request = new Request();
 
-  request.get('/orders')
-  .then((data) => {
-    this.setState({orders: data._embedded.orders})
-  })
-}
+    request.get('/api/orders')
+    .then((data) => {
+      this.setState({orders: data._embedded.orders})
+    })
+  }
 
-handleFormSubmit(submittedForm){
-  console.log(submittedForm);
-  submittedForm.id = Date.now();
-  const updatedOrders = [...this.state.orders, submittedForm];
-  console.log(updatedOrders);
-  this.setState({
-    orders: updatedOrders
-  })
-}
+  findOrderById(id){
+    return this.state.orders.find((order) => {
+      return order.id === parseInt(id);
+    });
+  }
+
+  handleDelete(id){
+    const request = new Request();
+    const url = '/api/orders' + id;
+    request.delete(url).then(() => {
+      window.location = '/orders';
+    })
+  }
+
+  handlePost(order){
+    const request = new Request();
+    request.post('/api/orders', order).then(() => {
+      window.location = '/orders'
+    })
+  }
+
+  handleUpdate(order, id){
+    const request = new Request();
+    request.patch('/api/orders/' + id, order).then(() => {
+      window.location = '/orders/' + id
+    })
+  }
 
   render(){
     return(
+      <Router>
       <Fragment>
-        <OrderCreateForm onFormSubmit= {this.handleFormSubmit} />
-        <OrderList orders={this.state.orders}/>
+      <Switch>
+
+      <Route exact path = '/orders/new' render={() =>{
+        return <OrderCreateForm onFormSubmit= {this.handlePost} />
+      }}/>
+
+      <Route exact path="/orders/:id/edit" render={(props) => {
+        const id = props.match.params.id
+        const order = this.findOrderById(id);
+        return <OrderEditForm order={order}
+        onUpdate={this.handleUpdate}/>
+      }}/>
+
+      <Route exact path="/orders/:id" render={(props) =>{
+        const order = this.findOrderById(props.match.params.id);
+        return <OrderDetail order={order}
+        onDelete={this.handleDelete}/>
+      }}/>
+
+      <Route render={(props) => {
+        return <OrderList orders={this.state.orders}/>
+      }}/>
+      </Switch>
       </Fragment>
+      </Router>
     )
   }
 

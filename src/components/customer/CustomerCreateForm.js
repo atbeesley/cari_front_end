@@ -8,7 +8,7 @@ constructor(props){
     name: "",
     wallet: 0,
     orders: [],
-    restaurant: null // could be something else (e.g. an empty string)
+    restaurant: null
   }
   this.handleName = this.handleName.bind(this);
   this.handleWallet = this.handleWallet.bind(this);
@@ -19,7 +19,7 @@ constructor(props){
 componentDidMount() {
   const request = new Request();
   request.get('/customers').then((data) => {
-    this.setState({ships: data._embedded.customers})
+    this.setState({customers: data._embedded.customers})
   })
 }
 
