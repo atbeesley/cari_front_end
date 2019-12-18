@@ -10,13 +10,19 @@ class OrderCreateForm extends Component {
       price: 0,
       collectionTime: "",
       customer: [],
-      dish: []
+      dish: [],
+      selectedRestaurant: "http://localhost:8080/api/restaurants/1",
+      selectedCustomer: "",
+      selectedDish: ""
 
     }
 
     this.handlePrice = this.handlePrice.bind(this);
     this.handleCollectionTime = this.handleCollectionTime.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRestaurant = this.handleRestaurant.bind(this);
+    this.handleCustomer = this.handleCustomer.bind(this);
+    this.handleDish = this.handleDish.bind(this);
   }
 
   componentDidMount(){
@@ -42,14 +48,26 @@ class OrderCreateForm extends Component {
     this.setState({collectionTime: event.target.value})
   }
 
+  handleRestaurant(event){
+    this.setState({selectedRestaurant: event.target.value})
+  }
+
+  handleCustomer(event){
+    this.setState({selectedCustomer: event.target.value})
+  }
+
+  handleDish(event){
+    this.setState({selectedDish: event.target.value})
+  }
+
   handleSubmit(event){
     event.preventDefault();
     const newOrder={
-      restaurant: this.state.restaurant.value,
+      restaurant: this.state.selectedRestaurant,
       price: this.state.price,
       collectionTime: this.state.collectionTime,
-      customer: this.state.customer.value,
-      dish: this.state.dish.value
+      customer: this.state.selectedCustomer,
+      dish: this.state.selectedDish
     }
     this.props.onFormSubmit(newOrder);
   }
@@ -85,7 +103,7 @@ class OrderCreateForm extends Component {
     return(
       <form onSubmit={this.handleSubmit}>
 
-      <select name="restaurant">{restaurantOptions}</select>
+      <select name="restaurant" onChange={this.handleRestaurant}>{restaurantOptions}</select>
 
       <input type="option" placeholder="Price" name="price"
       onChange={this.handlePrice} value={this.state.price} />
@@ -93,9 +111,9 @@ class OrderCreateForm extends Component {
       <input type="option" placeholder="Collection Time" name="collectionTime"
       onChange={this.handleCollectionTime} value={this.state.collectionTime} />
 
-      <select name="customer">{customerOptions}</select>
+      <select name="customer" onChange={this.handleCustomer}>{customerOptions}</select>
 
-      <select name="dish">{dishOptions}</select>
+      <select name="dish" onChange={this.handleDish}>{dishOptions}</select>
 
 
       <button type="submit">Save Order</button>
