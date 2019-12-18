@@ -11,9 +11,7 @@ const url = "/customers/" + props.customer.id;
 
 return (
   <Fragment>
-  <Link to = {url} className="name">
-  {props.customer.name}
-  </Link>
+
   <p>Name: {props.customer.name}</p>
 
   </Fragment>
