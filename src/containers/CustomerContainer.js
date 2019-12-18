@@ -11,12 +11,14 @@ class CustomerContainer extends Component {
     this.state = {
       customers: []
     }
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.findCustomerById = this.findCustomerById.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handlePost = this.handlePost.bind(this);
   }
   componentDidMount(){
     const request = new Request();
 
-    request.get('/customers')
+    request.get('/api/customers')
     .then((data) => {
       this.setState({customers: data._embedded.customers})
     })
@@ -35,31 +37,30 @@ class CustomerContainer extends Component {
       window.location = '/customers';
     });
   }
-  //
-  // handlePost(customer){
-  //   const request = new Request();
-  //   request.post('/customer' + id, customer).then(() => {
-  //     window.location = '/customers/' + id
-  //   })
-  // }
 
-  handleFormSubmit(submittedForm){
-    console.log(submittedForm);
-    submittedForm.id = Date.now();
-    const updatedCustomers = [...this.state.customers, submittedForm];
-    console.log(updatedCustomers);
-    this.setState({
-      customers: updatedCustomers
+  handlePost(customer){
+    const request = new Request();
+    request.post('/api/customers', customer).then(() => {
+      window.location = '/customers'
     })
   }
 
+
   render(){
     return(
-
+      <Router>
       <Fragment>
-      <CustomerCreateForm onFormSubmit= {this.handleFormSubmit} />
-      <CustomerList customers={this.state.customers} />
+      <Switch>
+      <Route exact path = '/customers/new' render={() =>{
+        return <CustomerCreateForm onFormSubmit= {this.handlePost} />
+      }}/>
+
+      <Route render={(props) =>{
+        return <CustomerList customers={this.state.customers}/>
+      }}/>
+      </Switch>
       </Fragment>
+      </Router>
     )
   }
 

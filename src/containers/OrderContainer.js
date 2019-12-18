@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import OrderList from '../components/orders/OrderList'
 import Request from '../helpers/Request.js'
-import OrderDetail from '../components/orders/OrderDetail'
 import OrderCreateForm from '../components/orders/OrderCreateForm'
 import OrderEditForm from '../components/orders/OrderEditForm'
 class OrderContainer extends Component {
@@ -13,6 +12,7 @@ class OrderContainer extends Component {
     }
     this.findOrderById = this.findOrderById.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handlePost = this.handlePost.bind(this);
   }
 
   componentDidMount(){
@@ -67,12 +67,6 @@ class OrderContainer extends Component {
         const order = this.findOrderById(id);
         return <OrderEditForm order={order}
         onUpdate={this.handleUpdate}/>
-      }}/>
-
-      <Route exact path="/orders/:id" render={(props) =>{
-        const order = this.findOrderById(props.match.params.id);
-        return <OrderDetail order={order}
-        onDelete={this.handleDelete}/>
       }}/>
 
       <Route render={(props) => {
