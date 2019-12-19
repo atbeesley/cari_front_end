@@ -7,7 +7,9 @@ class AdminContainer extends Component{
     return(
 
       <div className="admin">
+      <br></br>
       <h1>Welcome To Cari House</h1>
+      <br></br>
       <h4>Choose an Option From the NavBar Above</h4>
       </div>
     )
