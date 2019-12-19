@@ -11,12 +11,13 @@ const url = "/customers/" + props.customer.id;
 
 return (
   <Fragment>
-
+  <div className="customerBox">
   <p>Name: {props.customer.name}</p>
   <p>Customer ID: {props.customer.id}</p>
   <p>Wallet: {props.customer.wallet}</p>
   <p>Restaurant: {props.customer.restaurant.name}</p>
   <br></br>
+  </div>
 
   </Fragment>
 
