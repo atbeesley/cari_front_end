@@ -62,3 +62,9 @@ select{
   background-color: cornflowerBlue;
   border-radius: 10px;
 }
+
+.admin{
+  font-size: 50px;
+  text-align: center;
+  color: cornflowerBlue;
+}

@@ -5,6 +5,7 @@ import RestaurantContainer from './RestaurantContainer'
 import OrderContainer from './OrderContainer'
 import CustomerContainer from './CustomerContainer'
 import DishContainer from './DishContainer'
+import AdminContainer from './AdminContainer'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class MainContainer extends React.Component {
@@ -20,6 +21,7 @@ render(){
       <Route path="/customers" component={CustomerContainer}/>
       <Route path="/restaurants" component={RestaurantContainer}/>
       <Route path="/dishes" component={DishContainer}/>
+      <Route path="/admin" component={AdminContainer}/>
       </Switch>
       </Fragment>
       </Router>
