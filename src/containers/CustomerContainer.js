@@ -32,13 +32,14 @@ class CustomerContainer extends Component {
 
   handleDelete(id){
     const request = new Request();
-    const url = '/customer/' + id;
+    const url = '/api/customers' + id;
     request.delete(url).then(() => {
       window.location = '/customers';
     });
   }
 
   handlePost(customer){
+    console.log(customer)
     const request = new Request();
     request.post('/api/customers', customer).then(() => {
       window.location = '/customers'
@@ -52,8 +53,10 @@ class CustomerContainer extends Component {
       <Fragment>
       <Switch>
       <Route exact path = '/customers/new' render={() =>{
-        return <CustomerCreateForm onFormSubmit= {this.handlePost} />
+        return <CustomerCreateForm onFormSubmit= {this.handlePost}/>
       }}/>
+
+
 
       <Route render={(props) =>{
         return <CustomerList customers={this.state.customers}/>

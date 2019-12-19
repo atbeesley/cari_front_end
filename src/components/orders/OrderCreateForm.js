@@ -101,7 +101,7 @@ class OrderCreateForm extends Component {
     })
 
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="orderForm">
 
       <select name="restaurant" onChange={this.handleRestaurant}>{restaurantOptions}</select>
 

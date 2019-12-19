@@ -11,12 +11,12 @@ const Order = (props) => {
 
   return (
     <Fragment>
-    <Link to = {url} className="name">
-    {props.order.customerName}
-    </Link>
-    <p>Name: {props.order.customer.name}</p>
-    <p>ID: {props.order.id}</p>
-    <p>Price: {props.order.price}</p>
+    <p>Customer Name: {props.order.customer.name}</p>
+    <p>Order ID: {props.order.id}</p>
+    <p>Price: {props.order.dishes[0].price}</p>
+    <p>Collection Time: {props.order.collectionTime}</p>
+    <p>Restaurant: {props.order.restaurant.name}</p>
+    <br></br>
 
     </Fragment>
   )

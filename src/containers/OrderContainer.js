@@ -1,9 +1,9 @@
 import React, {Component, Fragment} from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import OrderList from '../components/orders/OrderList'
 import Request from '../helpers/Request.js'
+import OrderList from '../components/orders/OrderList'
 import OrderCreateForm from '../components/orders/OrderCreateForm'
-import OrderEditForm from '../components/orders/OrderEditForm'
+
 class OrderContainer extends Component {
   constructor(props){
     super(props);
@@ -60,13 +60,6 @@ class OrderContainer extends Component {
 
       <Route exact path = '/orders/new' render={() =>{
         return <OrderCreateForm onFormSubmit= {this.handlePost} />
-      }}/>
-
-      <Route exact path="/orders/:id/edit" render={(props) => {
-        const id = props.match.params.id
-        const order = this.findOrderById(id);
-        return <OrderEditForm order={order}
-        onUpdate={this.handleUpdate}/>
       }}/>
 
       <Route render={(props) => {

@@ -1,19 +1,22 @@
 .App {
   text-align: center;
+  background-color: cornflowerBlue;
 }
 
 
   header * {
-  background-color: black;
+  background-color: white;
   max-height: 5%;
   display: inline;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 28px;
+  color: black;
+  padding-left: 22px;
+  border-right: 0.5px solid grey;
+  border-bottom: 0.5px solid grey;
+  text-decoration: none;
 }
 
 .App-link {
-  color: #61dafb;
+  color: cornflowerBlue;
 }

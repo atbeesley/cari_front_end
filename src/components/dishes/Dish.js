@@ -11,10 +11,12 @@ const Dish = (props) => {
 
   return (
     <Fragment>
-    <Link to = {url} className="name">
-    {props.dish.name}
-    </Link>
-    <p>{props.dish.name}</p>
+    <p>Name:{props.dish.name}</p>
+    <p>Order ID:{props.dish.order.id}</p>
+    <p>Price:{props.dish.order.price}</p>
+    <p>Spice Level: {props.dish.spiceLevel}</p>
+    <br></br>
+
     </Fragment>
   )
 }
